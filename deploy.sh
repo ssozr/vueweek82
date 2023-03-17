@@ -23,6 +23,6 @@ git commit -m 'deploy'
 # if you are deploying to https://ssozr.github.io
 # git push -f git@github.com:<ssozr>/<ssozr>.github.io.git main
 
-# if you are deploying to https://<ssozr>.github.io/<vueweek8>
-git push -f https://github.com/ssozr/vueweek8.git main:gh-pages
+# if you are deploying to https://<ssozr>.github.io/<vueweek82>
+git push -f https://github.com/ssozr/vueweek82.git main:gh-pages
 cd -
