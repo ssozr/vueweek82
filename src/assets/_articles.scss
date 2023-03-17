@@ -1,0 +1,11 @@
+.articles {
+  img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .card-body {
+    height: 100%;
+  }
+}

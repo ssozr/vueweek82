@@ -1,0 +1,160 @@
+@mixin backgroundImage() {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.banner {
+    background-image: url("./images/banner\ bg.png");
+    height: 832px;
+    @include backgroundImage();
+    @media (max-width: 1200px) {
+        background-image: url("./images/工作區域\ 3.png");
+        height: 600px;
+     }
+    @media (max-width: 576px) {
+        background-image: url("./images/工作區域\ 3.png");
+        height: 375px;
+        .search {
+            position: absolute;
+            bottom: -10%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            .form-control {
+                font-size: 24px;
+            }
+         }
+     }
+     h1 {
+        font-size: 40px;
+        line-height: 48px;
+        @media (max-width: 768px) {
+          font-size: 32px;
+          line-height: 38.4px;
+         }
+     }
+}
+
+.second {
+    .img-1 {
+        background-image: url('./images/Rectangle\ 278.png');
+        height: 300px;
+        @include backgroundImage(); 
+        @media (max-width: 768px) {
+            height: 160px;
+        }
+    }
+    .img-2 {
+        background-image: url('./images/Rectangle\ 279.png');
+        height: 300px;
+        @include backgroundImage();
+        @media (max-width: 768px) {
+            height: 160px;
+        }
+    }
+    .img-3 {
+        background-image: url("./images/Rectangle\ 280.png");
+        height: 300px;
+        @include backgroundImage();
+        @media (max-width: 768px) {
+            height: 160px;
+        }
+    }
+    .img-4 {
+        background-image: url("./images/Rectangle\ 281.png");
+        height: 300px;
+        @include backgroundImage();
+        @media (max-width: 768px) {
+            height: 160px;
+        }
+    }
+}
+
+.third {
+    @media (max-width:768px) {
+       .teacher {
+        display: none;
+       } 
+    }
+    .teacher-1 {
+        background-image: url("./images/Ellipse\ 14\ \(1\).png");
+        height: 268px;
+        width: 268px;
+        @include backgroundImage();
+        border-radius:50%;
+    }
+    .teacher-2 {
+        background-image: url("./images/Ellipse\ 14.png");
+        height: 268px;
+        width: 268px;
+        @include backgroundImage();
+        border-radius:50%;
+    }
+}
+
+.fourth {
+    .fz-18 {
+        font-size: 18px;
+        line-height: 21.6px;
+    }
+    .img-1 {
+        background-image: url("./images/Group\ 402.png");
+        height: 200px;
+        @include backgroundImage();
+        @media (max-width: 768px) {
+            background-size: contain;
+        }
+    }
+    .img-2 {
+        background-image: url("./images/Group\ 403.png");
+        height: 200px;
+        @include backgroundImage();
+        @media (max-width: 768px) {
+            background-size: contain;
+        }
+    }
+    .img-3 {
+        background-image: url("./images/Group\ 404.png");
+        height: 200px;
+        @include backgroundImage();
+        @media (max-width: 768px) {
+            background-size: contain;
+        }
+    }
+    .img-4 {
+        background-image: url("./images/Group\ 405.png");
+        height: 200px;
+        @include backgroundImage();
+        @media (max-width: 768px) {
+            background-size: contain;
+        }
+    }
+}
+
+.index-article{
+    img {
+      height: 84px;
+      object-fit: cover;
+    }
+    p {
+      font-size: 16px;
+      line-height: 19.2px;
+    }
+    .preBtn {
+      background-image: url("./images/2.png");
+      height: 40px;
+      width: 40px;
+      @include backgroundImage()
+    }
+}
+
+
+.fifth {
+    background-image: url("./images/Rectangle\ 294.png");
+    height: 500px;
+    @include backgroundImage();
+    @media (max-width: 768px) {
+      background-image: url("./images/Rectangle\ 294-2.png");
+      height: 292px;
+    }
+}

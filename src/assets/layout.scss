@@ -1,0 +1,29 @@
+.header {
+  img {
+    height:24px;
+  }
+  &-ul {
+    coleot:red;
+  }
+};
+
+.footer {
+  img {
+    height:24px;
+  }
+  .img-line {
+    background-image: url("./images/Vector.png");
+    height: 22px;
+    width: 24px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+
+.menu {
+
+  img {
+    height: 24px;
+  }
+}
