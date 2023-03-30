@@ -40,10 +40,10 @@
       </tr>
     </tbody>
   </table>
-  <pagination
+  <Pagination
   :pages="pagination"
   @change-page="changePage"
-  ></pagination>
+  ></Pagination>
   <loading v-model:active="isLoading"/>
 
 <!--刪除 modal -->
@@ -88,7 +88,6 @@
     </div>
   </div>
 </div>
-
 </template>
 
 <script>
@@ -96,7 +95,7 @@ import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/css/index.css'
 import Swal from 'sweetalert2'
 import { Modal } from 'bootstrap'
-import pagination from '../../components/PaginationView.vue'
+import Pagination from '@/components/PaginationView.vue'
 const { VITE_URL, VITE_PATH } = import.meta.env
 export default {
   data () {
@@ -113,20 +112,19 @@ export default {
     }
   },
   components: {
-    pagination,
+    Pagination,
     Loading
   },
   methods: {
     getOrders (page = 1) {
       this.$http.get(`${VITE_URL}/v2/api/${VITE_PATH}/admin/orders/?page=${page}`)
         .then((res) => {
-          console.log(res)
           this.isLoading = false
           this.orders = res.data.orders
           this.pagination = res.data.pagination
         })
         .catch((err) => {
-          console.log(err)
+          alert(err.data.message).error(err)
         })
     },
     opDelModal (id) {
@@ -142,7 +140,7 @@ export default {
           this.delModal.hide()
         })
         .catch((err) => {
-          console.log(err)
+          alert(err.data.message).error(err)
         })
     },
     opOrderModal (item) {
@@ -159,7 +157,7 @@ export default {
           this.getOrders()
         })
         .catch((err) => {
-          console.log(err)
+          alert(err.data.message).error(err)
         })
     },
     changePage (page) {
@@ -179,6 +177,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-</style>

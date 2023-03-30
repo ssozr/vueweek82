@@ -1,11 +1,10 @@
 @import "bootstrap/scss/functions";
 @import "./variables";
 @import "bootstrap/scss/bootstrap";
-@import "./style";
+@import "./scss/style";
 
-@import "./bass.scss";
-@import "./layout.scss";
-@import "./index.scss";
-@import "./class.scss";
-@import "./articles.scss";
-@import "./article.scss"
+@import "./scss/layout.scss";
+@import "./scss/index.scss";
+@import "./scss/class.scss";
+@import "./scss/articles.scss";
+@import "./scss/article.scss"

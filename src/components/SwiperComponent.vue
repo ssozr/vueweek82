@@ -28,7 +28,6 @@ body {
   text-align: center;
   font-size: 18px;
   background: #F8C343;
-
   /* Center slide text vertically */
   display: flex;
   justify-content: center;
@@ -68,17 +67,17 @@ body {
 
 
 <template>
-  <swiper :pagination="true" :modules="modules" class="mySwiper">
+  <swiper :pagination="true" :modules="modules" class="mySwiper" :space-between="50">
     <swiper-slide>
       <div class="row">
-        <div class="card border-primary border-0 p-0" style="width: 362px;">
+        <div class="card border-primary border-0 bg-primary" style="width: auto;">
           <div class="bg-primary border-primary d-flex justify-content-center">
-            <div class="rounded-circle border border-secondary position-relative " style="width: 308px;">
+            <div class="rounded-circle border border-secondary position-relative " >
               <div class="teacher-1 m-5"></div>
               <img src="../assets/images/Ellipse18.png" alt="" class="position-absolute top-0 end-0">
             </div>
           </div>
-          <div class="card-body bg-primary p-0">
+          <div class="card-body bg-primary">
             <h5 class="card-title mt-6 text-center mb-8" >Aaliyah</h5>
             <p class="card-text mb-6 fs-6">人的一生中，與自己的對話，多過與別人的對話 但我們對自己講的話，不一定是溫和，真實，有幫助， 有時甚至毫不尊重．</p>
             <div class="text-center">
@@ -90,16 +89,16 @@ body {
     </swiper-slide>
     <swiper-slide>
       <div class="row">
-        <div class="card border-primary border-0 p-0" style="width: 362px;">
+        <div class="card border-primary border-0 bg-primary" style="width: auto;">
           <div class="bg-primary border-primary d-flex justify-content-center">
-            <div class="rounded-circle border border-secondary position-relative " style="width: 308px;">
+            <div class="rounded-circle border border-secondary position-relative ">
               <div class="teacher-2 m-5"></div>
               <img src="../assets/images/Ellipse18.png" alt="" class="position-absolute bottom-0 end-0">
             </div>
           </div>
-          <div class="card-body bg-primary p-0">
+          <div class="card-body bg-primary">
             <h5 class="card-title mt-6 text-center mb-8" >Aaliyah</h5>
-            <p class="card-text mb-6 fs-6">改變往往不像Nike說的那麼單純: Just Do it ，也不像許新年願望那麼簡單，改變需要通過一連串階段，讓你慢慢的好起來...</p>
+            <p class="card-text mb-6 fs-6 ms-3">改變往往不像Nike說的那麼單純: Just Do it ，也不像許新年願望那麼簡單，改變需要通過一連串階段，讓你慢慢的好起來...</p>
             <div class="text-center">
               <button type="button" class="btn btn-secondary rounded-pill px-10 py-3">課程連結</button>
             </div>

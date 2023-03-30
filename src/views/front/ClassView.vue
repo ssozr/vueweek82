@@ -22,7 +22,7 @@
               <li><p class="fs-4 m-0">課程總額:<span class="ms-4">NT${{ classData.price }}</span></p></li>
             </ul>
             <div class="d-lg-flex mt-3">
-              <button type="button" class="btn btn-primary" @click="addCart(classData)">收藏課程</button>
+              <button type="button" class="btn btn-primary" @click="addCart(classData)">加入購物車</button>
               <button to="/cart" type="button" class="btn btn-primary ms-6" @click="changeGoCart(classData)">立即上課</button>
             </div>
           </div>
@@ -30,10 +30,14 @@
       </div>
     </div>
   </div>
+  <div class="mb-15 mb-md-30">
+    <SwiperClassVue></SwiperClassVue>
+  </div>
 </template>
 
 <script>
 import Swal from 'sweetalert2'
+import SwiperClassVue from '@/components/SwiperClass.vue'
 const { VITE_PATH, VITE_URL} = import.meta.env
 export default{
   data () {
@@ -44,6 +48,7 @@ export default{
     }
   },
   components: {
+    SwiperClassVue
   },
   methods: {
     getClassData () {

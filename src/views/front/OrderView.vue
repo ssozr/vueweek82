@@ -53,6 +53,10 @@
   background-color:#F79E1B;
 }
 
+.btn-list .test:disabled{
+  cursor: not-allowed;
+}
+
 </style>
 
 <template>
@@ -70,7 +74,7 @@
           <div class="row" v-if="num === 1">  <!-- 購物車資訊 -->
             <h2 class="text-center">訂單確認</h2>
             <div class="row">
-              <table class="table align-middle">
+              <table class="table align-middle d-lg-table d-none col-12">
                 <thead>
                   <tr class="text-center">
                     <th scope="col">課程名稱</th>
@@ -84,13 +88,13 @@
                 <tbody>
                   <tr v-for="(item, i) in cartData.carts" :key="i" class="text-center">
                     <td>
-                      <h2>{{ item.product.title }}</h2>
+                      <h2 class="fs-6 mb-0">{{ item.product.title }}</h2>
                     </td>
                     <td>{{ item.product.unit }}</td>
                     <td >{{ item.product.origin_price * item.qty}}堂</td>
                     <td>
                       <div class="dropdown" >
-                        <button :disabled="disabled" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button  class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                           {{ item.qty }} 
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" >
@@ -98,7 +102,7 @@
                         </ul>
                       </div>
                     </td>
-                    <td>{{ item.total }}</td>
+                    <td>{{ formatNumber(item.total) }}</td>
                     <td><button type="button" class="btn btn-primary rounded-pill" @click=" openDelModal(item)">刪除</button></td>
                   </tr>
                   <tr class="text-center">
@@ -107,10 +111,26 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td class="align-bottom"><h2 class="border-bottom border-primary border-3 mb-0">總金額:NT <span class="ms-1">{{ cartData.total }}</span></h2></td>
+                    <td class="align-bottom"><h2 class="border-bottom border-primary border-3 mb-0">總金額:NT <span class="ms-1">{{ formatNumber(cartData.total) }}</span></h2></td>
                   </tr>
                 </tbody>
               </table>
+              <div class="row d-lg-none my-15">
+                <ul  v-for="(item, i) in cartData.carts" :key="i"  class="border-bottom pb-3 border-primary">
+                  <li class="">
+                    <RouterLink  :to="`/class/${item.product.id}`"><h2 class="fs-5">{{ item.product.title }}</h2></RouterLink>
+                    <div class="d-flex align-items-center justify-content-between">
+                      <div>課程總價格:{{ formatNumber(item.total) }}</div>
+                      <button type="button" class="btn btn-primary" @click="openDataModal(item)">詳細資料</button>
+                    </div>
+                  </li>
+                </ul>
+                <div class="text-end">
+                  <h2 class="mb-0 fs-4">
+                  總金額:NT <span class="ms-1">{{ cartData.total }}</span>
+                </h2>
+                </div>
+              </div>
               <div class="modal" tabindex="-1" ref="delModal">
                 <div class="modal-dialog">
                   <div class="modal-content">
@@ -122,17 +142,53 @@
                       <p>確定移出購物車?</p>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
                       <button type="button" class="btn btn-primary" @click="delCart(delData.id)">確認移出</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal" tabindex="-1" ref="dataModal">
+                <div class="modal-dialog">
+                  <div class="modal-content" v-if="dataModalJudge">
+                    <div class="modal-header">
+                      <h5 class="modal-title">課程名稱: <span class="border-bottom border-3 border-primary">{{ productData.product.title }}</span></h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <ul class="p-0">
+                        <li class=" mb-3">
+                          <div class="d-flex align-items-center justify-content-between">
+                            <div>總堂數:{{ productData.product.origin_price * productData.qty}}堂</div>
+                            <div>授課老師: {{ productData.product.unit }}</div>
+                          </div>
+                        </li>
+                        <li class="d-flex align-items-center justify-content-between">
+                          <div>課程總價格:{{ formatNumber(productData.total) }}</div>
+                          <div class="dropdown" >
+                            購買次數:
+                            <button  class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                              {{ productData.qty }} 
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" >
+                              <li v-for="(num, i) in 20" :key="i"><a  @click="changeQty(num,productData.id)" class="dropdown-item">{{ num }}</a></li>
+                            </ul>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                      <button type="button" class="btn btn-primary" @click="delCart(productData)">確認移出</button>
                     </div>
                   </div>
                 </div>
               </div>
           </div>
         </div>  
-        <div class="row" v-if="num ===2"> <!-- 資料填寫 -->
+        <div class="row col-md-6 offset-md-3" v-if="num ===2"> <!-- 資料填寫 -->
           <div class="mb-3 col-md-6"> <!-- 姓名 -->
-            <label for="name" class="form-label">姓名: <span v-if="errors['姓名']" class="text-danger">{{ errors['姓名'] }}</span></label>
+            <label for="name" class="form-label">*姓名: <span v-if="errors['姓名']" class="text-danger">{{ errors['姓名'] }}</span></label>
             <v-field id="name"
               name="姓名"
               type="text"
@@ -145,7 +201,7 @@
             <error-message name="姓名" class="invalid-feedback"></error-message>
           </div>
           <div class="mb-3 col-md-6"> <!-- 信箱 -->
-            <label for="email" class="form-label">信箱: <span v-if="errors['email']" class="text-danger">{{ errors.email }}</span></label>
+            <label for="email" class="form-label">*信箱: <span v-if="errors['email']" class="text-danger">{{ errors.email }}</span></label>
             <v-field id="email"
               name="email"
               type="email"
@@ -157,10 +213,10 @@
             <error-message name="email" class="invalid-feedback"></error-message>
           </div>
           <div class="mb-3 col-md-6"> <!-- 電話 -->
-            <label for="phone" class="form-label">手機號碼: <span v-if="errors['電話']" class="text-danger">{{ errors['電話'] }}</span></label>
+            <label for="phone" class="form-label">*手機號碼: <span v-if="errors['電話']" class="text-danger">{{ errors['電話'] }}</span></label>
             <v-field id="phone"
               name="電話"
-              type="text"
+              type="tel"
               class="form-control"
               :class="{ 'is-invalid': errors['電話'] }"
               placeholder="0912345678"
@@ -187,7 +243,7 @@
             <error-message name="付款方式" class="invalid-feedback"></error-message>
           </div>
           <div class="input-group mb-3"> <!-- 地址 -->
-            <label style="width: 100%;" for="地址" class="form-label">地址: <span v-if="errors['地址']" class="text-danger">{{ errors.地址 }}</span></label>
+            <label style="width: 100%;" for="地址" class="form-label">*地址: <span v-if="errors['地址']" class="text-danger">{{ errors.地址 }}</span></label>
             <select class="btn btn-outline-secondary" @change="city" v-model="address.city"> <!-- 縣市 -->
               <option value="" v-if="!address.city">請選擇</option>
               <option :value="address.CityName" v-for="(address, index) in addressData" :key="index">{{ address.CityName }}</option>
@@ -221,15 +277,15 @@
           </div>
           <div class="text-end d-flex justify-content-center col-md-4">
             <div class="d-flex align-items-end">
-              <h2 v-if="!coupon.couponJudge" class="border-bottom border-primary border-3 mb-0">總金額:NT <span class="ms-1">{{ cartData.total }}</span></h2>
-              <h2 v-else class="border-bottom border-primary border-3 mb-0">總金額:NT <span class="ms-1">{{ cartData.final_total }}</span></h2>
+              <h2 v-if="!coupon.couponJudge" class="border-bottom border-primary border-3 mb-0 fs-5">總金額:NT <span class="ms-1">{{ formatNumber(cartData.total) }}</span></h2>
+              <h2 v-else class="border-bottom border-primary border-3 mb-0 fs-5">總金額:NT <span class="ms-1">{{ formatNumber(cartData.final_total) }}</span></h2>
             </div>
           </div>
         </div>
-        <div class="text-center mt-6">
+        <div class="text-center mt-6 btn-list">
           <button class="btn btn-primary rounded-pill me-3" type="button" v-if="num === 2" @click="preBtn">上一步</button>
           <button class="btn btn-primary rounded-pill me-3" type="button" v-if="num === 1" @click="nextBtn">下一步</button>
-          <button class="btn btn-primary rounded-pill me-3" type="submit" v-if="num === 2"  :disabled="errors['email','電話','地址','付款方式'] || disabled">送出資料</button>
+          <button class="btn btn-primary rounded-pill me-3 test" type="submit" v-if="num === 2"  :disabled="errors['email','電話','地址','付款方式'] || disabled">送出資料</button>
         </div>
         </v-form>
         <div class="row" v-if="num === 3">
@@ -281,6 +337,8 @@ export default {
       dalModal: '', /* 刪除訂單Modal */
       delData: {}, /* 刪除訂單資烙 */
       delId: '', /* 刪除訂單ID */
+      dataModal: '',
+      dataModalJudge: false,
       disabled: true,
       addressData: '', /* 縣市區域資料 */
       address: { /* 地址填寫 */
@@ -324,7 +382,7 @@ export default {
           this.cartData = res.data.data
         })
         .catch((err) => {
-          console.log(err)
+          alert(err.data.message).error(err)
         })
     },
     openDelModal (item) { /* 開啟刪除Modal */
@@ -336,15 +394,15 @@ export default {
     delCart () { /* 刪除購物車資料 */
       this.$http.delete(`${VITE_URL}/v2/api/${VITE_PATH}/cart/${this.delId}`)
       .then((res) => {
-        console.log(res)
         this.delData = {}
         this.delId = ""
         this.delModal.hide()
         this.getCartData()
+        this.dataModal.hide()
         Swal.fire(`${res.data.message}`)
       })
       .catch((err) => {
-        console.log(err)
+        alert(err.data.message).error(err)
       })
     },
     changeQty (num, id) { /* 更改購物車產品數量 */
@@ -355,31 +413,28 @@ export default {
       }
       this.$http.put(`${VITE_URL}/v2/api/${VITE_PATH}/cart/${id}`,{ data })
         .then((res) => {
-          console.log(res)
           Swal.fire(`${res.data.message}`)
           this.disabled = false
+          this.dataModal.hide()
           this.getCartData()
         })
         .catch((err) => {
-          console.log(err)
+          alert(err.data.message).error(err)
         })
     },
     getAddressData () { /* 獲取縣市區域資料 */
       this.$http.get(`https://raw.githubusercontent.com/donma/TaiwanAddressCityAreaRoadChineseEnglishJSON/master/AllData.json`)
         .then((res) => {
           this.addressData = res.data
-          console.log(res)
-          console.log(this.addressData)
         })
         .catch((err) => {
-          console.log(err)
+          alert(err.data.message).error(err)
         })
     },
     disabledBtn () {
       this.disabled = false
     },
     city () { /* 地址填寫市區selec */
-      console.log(this.address.city)
       this.address.areaName = ''
       const index = this.addressData.findIndex(item => item.CityName === this.address.city);
       this.address.index = index
@@ -395,13 +450,12 @@ export default {
       }
       this.$http.post(`${VITE_URL}/v2/api/${VITE_PATH}/coupon`,{ data })
         .then((res) => {
-          console.log(res)
           this.coupon.couponJudge = res.data.success
           Swal.fire(`${res.data.message}`)
           
         })
         .catch((err) => {
-          console.log(err)
+          alert(err.data.message).error(err)
         })
     },
     couponBtnDel () {
@@ -420,32 +474,42 @@ export default {
       }
       this.$http.post(`${VITE_URL}/v2/api/${VITE_PATH}/order`, { data })
         .then((res) => {
-          console.log(res)
           this.orderId = res.data.orderId
           this.payModal.show()
         })
         .catch((err) =>{
-          console.log(err)
+          alert(err.data.message).error(err)
         })
     },
     pay () {
       this.$http.post(`${VITE_URL}/v2/api/${VITE_PATH}/pay/${this.orderId}`)
         .then((res) => {
-          console.log(res)
           this.payModal.hide()
           Swal.fire(`${res.data.message}`)
           this.num++
         })
         .catch((err) => {
-          console.log(err)
+          alert(err.data.message).error(err)
         })
-    }
+    },
+    openDataModal (item) {
+      this.dataModalJudge = true
+      this.productData = { ...item}
+      this.delId = item.id
+      this.dataModal.show()
+    },
+    formatNumber(number) {
+      if(number){
+        return number.toLocaleString();
+      }
+    },
   },
   mounted () {
     this.getCartData() /* 獲取購物車資料 */
     this.delModal = new Modal(this.$refs.delModal) /* Modal */
     this.getAddressData() /* 獲取縣市區域資料 */
     this.payModal = new Modal(this.$refs.payModal)
+    this.dataModal = new Modal(this.$refs.dataModal)
   }
 }
 </script>

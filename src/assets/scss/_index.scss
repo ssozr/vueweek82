@@ -9,11 +9,11 @@
     height: 832px;
     @include backgroundImage();
     @media (max-width: 1200px) {
-        background-image: url("./images/工作區域\ 3.png");
+        background-image: url("./images/banner-phone.png");
         height: 600px;
      }
     @media (max-width: 576px) {
-        background-image: url("./images/工作區域\ 3.png");
+        background-image: url("./images/banner-phone.png");
         height: 375px;
         .search {
             position: absolute;

@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import HomeView from '../views/front/HomeView.vue'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -7,35 +7,35 @@ const router = createRouter({
   routes: [
     {
       path:'/',
-      component: () => import('../views/FrontLayout.vue'),
+      component: () => import('../views/front/FrontLayout.vue'),
       children: [
         {
           path: 'about',
           name: 'about',
-          component: () => import('../views/AboutView.vue')
+          component: () => import('../views/front/AboutView.vue')
         },
         {
           path: 'articles',
           name: 'articles',
-          component: () => import('../views/ArticlesView.vue')
+          component: () => import('../views/front/ArticlesView.vue')
         },
         {
           path: 'teachers',
           name: 'teachers',
-          component: () => import('../views/ClassesView.vue')
+          component: () => import('../views/front/ClassesView.vue')
         },
         {
           path: 'article/:id',
-          component: () => import('../views/ArticleView.vue')
+          component: () => import('../views/front/ArticleView.vue')
         },
         {
           path: 'class/:id',
-          component: () => import('../views/ClassView.vue')
+          component: () => import('../views/front/ClassView.vue')
         },
         {
           path: 'cart',
           name: 'cart',
-          component: () => import('../views/CartView.vue')
+          component: () => import('../views/front/CartView.vue')
         },
         {
           path: '',
@@ -44,7 +44,7 @@ const router = createRouter({
         },
         {
           path: 'order',
-          component: () => import('../views/OrderView.vue')
+          component: () => import('../views/front/OrderView.vue')
         }
       ]
       
@@ -74,6 +74,10 @@ const router = createRouter({
           component: () => import('../views/user/ArticleView.vue')
         }
       ]
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      component: () => import('../views/front/NotFount.vue')
     }
   ]
 })

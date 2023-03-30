@@ -6,7 +6,7 @@
           <div class="card mb-3 p-0">
           <div class="row g-0">
             <div class="col-md-4">
-              <img :src="item.image" alt="...">
+              <img :src="item.image" alt="文章示意圖片">
             </div>
             <div class="col-md-8">
               <div class="card-body d-flex flex-column justify-content-between">
@@ -24,17 +24,17 @@
         </div>
         </RouterLink>
       </div>
-        <pagination :class="{ 'd-none': pagination.total_pages === 1 }"
+        <Pagination :class="{ 'd-none': pagination.total_pages === 1 }"
         :pages="pagination" 
         @change-page="changePage"
-        ></pagination>
+        ></Pagination>
     </div>
   </div>
 </template>
 
 <script>
 const {VITE_PATH, VITE_URL} = import.meta.env
-import pagination from '../components/PaginationView.vue'
+import Pagination from '@/components/PaginationView.vue'
 import { RouterLink } from 'vue-router'
 
 export default {
@@ -45,19 +45,18 @@ export default {
     }
   },
   components: {
-    pagination,
+    Pagination,
     RouterLink
   },
   methods: {
     getArticleData ( page = 1 ) {
       this.$http.get(`${VITE_URL}/v2/api/${VITE_PATH}/articles/?page=${page}`)
         .then((res) => {
-          console.log(res)
           this.articleData = res.data.articles
           this.pagination = res.data.pagination
         })
         .catch((err) => {
-          console.log(err)
+          alert(err.data.message).error(err)
         })
     },
     time (at) {
