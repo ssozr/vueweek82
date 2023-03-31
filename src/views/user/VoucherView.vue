@@ -26,15 +26,16 @@
         </tr>
     </tbody>
   </table>
-  <pagination
+  <Pagination
     :pages="pagination"
     @change-page="changePage"
-  ></pagination>
+  ></Pagination>
   <loading v-model:active="isLoading"/>
 
   <!-- 新增優惠券modal -->
   <div class="modal" tabindex="-1" ref="couponModal" id="couponModal">
   <div class="modal-dialog">
+    {{ couponData }}
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">建立優惠券</h5>
@@ -97,7 +98,7 @@
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/css/index.css'
 import Swal from 'sweetalert2'
-import pagination from '../../components/PaginationView.vue'
+import Pagination from '@/components/PaginationView.vue'
 import { Modal } from 'bootstrap'
 const { VITE_PATH, VITE_URL } = import.meta.env
 
@@ -131,12 +132,13 @@ export default {
           this.isLoading = false
         })
         .catch((err) => {
-          console.log(err)
+          alert(err.data.message)
         })
     },
     openCouponMadl () {
       this.modal = true
       this.couponData = {}
+      this.couponData.is_enabled = 0
       this.couponModal.show()
     },
     openEdit (item) {
@@ -150,6 +152,12 @@ export default {
     },
     newCoupon () {
       this.isLoading = true
+      if (this.couponData.percent <= 0 || this.couponData.percent >= 100) {
+        alert('折扣不得大於100%或是負數')
+        this.couponModal.hide()
+        this.isLoading = false
+        return
+      }
       if (this.modal === false) {
         this.timeChange()
         const data = { ...this.couponData }
@@ -160,7 +168,7 @@ export default {
             this.couponModal.hide()
           })
           .catch((err) => {
-            console.log(err)
+            alert(err.data.message)
           })
       } else {
         this.timeChange()
@@ -201,7 +209,7 @@ export default {
           this.delCouponModal.hide()
         })
         .catch((err) => {
-          console.log(err)
+          alert(err.data.message)
         })
     },
     changePage (page) {
@@ -209,7 +217,7 @@ export default {
     }
   },
   components: {
-    pagination,
+    Pagination,
     Loading
   },
   mounted () {

@@ -110,8 +110,7 @@
 
                   <div class="mb-3">
                     <label for="description" class="form-label">文章描述</label>
-                    <textarea id="description" type="text" class="form-control" v-model="data.description"
-                              placeholder="請輸入產品描述">
+                    <textarea id="description" type="text" class="form-control" v-model="data.description" placeholder="請輸入產品 描述">
                     </textarea>
                   </div>
                   <div class="mb-3">
@@ -169,11 +168,10 @@ export default {
     getAriticle () {
       this.$http.get(`${VITE_URL}/v2/api/${VITE_PATH}/admin/articles`)
         .then((res) => {
-          console.log(res)
           this.ariticleData = res.data
         })
         .catch((err) => {
-          console.log(err)
+          alert(err.data.message).error(err)
         })
     },
     openEditModla (item) {
@@ -183,7 +181,6 @@ export default {
       this.data = { ...item }
       this.data.create_at = this.time(item.create_at)
       this.dataId = item.id
-      console.log(this.data)
     },
     openModal () {
       this.modal = true
@@ -194,27 +191,25 @@ export default {
         this.timeChange()
         const data = { ...this.data }
         this.$http.post(`${VITE_URL}/v2/api/${VITE_PATH}/admin/article`, { data })
-          .then((res) => {
-            console.log(res)
+          .then(() => {
             this.data = {}
             this.getAriticle()
             this.articleModal.hide()
           })
           .catch((err) => {
-            console.log(err)
+            alert(err.data.message).error(err)
           })
       } else {
         this.timeChange()
         const data = { ...this.data }
         this.$http.put(`${VITE_URL}/v2/api/${VITE_PATH}/admin/article/${this.dataId}`, { data })
-          .then((res) => {
-            console.log('修改', res)
+          .then(() => {
             this.data = {}
             this.getAriticle()
             this.articleModal.hide()
           })
           .catch((err) => {
-            console.log(err)
+            alert(err.data.message).error(err)
           })
       }
     },
@@ -231,12 +226,11 @@ export default {
     },
     delArticle (id) {
       this.$http.delete(`${VITE_URL}/v2/api/${VITE_PATH}/admin/article/${id}`)
-        .then((res) => {
-          console.log(res)
+        .then(() => {
           this.getAriticle()
         })
         .catch((err) => {
-          console.log(err)
+          alert(err.data.message).error(err)
         })
     }
   },

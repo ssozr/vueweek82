@@ -3,7 +3,7 @@
   <div class="container-fluid banner px-0 d-flex align-items-center mb-15 mb-md-30 position-relative">
     <div class="container">
       <div class="row">
-        <div class="px-0 col-md-5 col-8 mt-49">
+        <div class="px-0 ms-3 col-md-5 col-8 mt-49">
           <h1 class="mb-0 fs-1">用我們的專業，幫您看見內心</h1>
           <label for="search"><h4 class="mt-md-8 pb-md-6 mt-3 pb-3 mb-0">我想看見...</h4></label>
           <div class="input-group">
@@ -17,13 +17,6 @@
               <span class="material-symbols-outlined text-white">search</span>
             </button>
           </div>
-          <!-- <div class="input-group search">
-            <input id="search" type="text" class="form-control" placeholder="人生方向、家庭關係...">
-            <span class="input-group-text bg-primary">
-              <span class="material-symbols-outlined text-white">search</span>
-            </span>
-            <div class="d-block">123s</div>
-          </div> -->
         </div>
       </div>
     </div>
@@ -57,7 +50,9 @@
     <div class="d-flex justify-content-center">
       <h2 class="fs-1 text-center mb-md-15 mb-8 border-bottom border-secondary border-2 pb-3 pt-15 ">讓專業，協助您看見真實</h2>
     </div>
-    <swiper class="d-md-none"></swiper>
+    <div class="row">
+      <swiper class="d-md-none"></swiper>
+    </div>
     <div class="row teacher">
       <div class="col-md-6 p-0 mb-6 mb-md-0">
         <RouterLink to="teachers">
@@ -66,12 +61,12 @@
               <div class="bg-primary border-primary">
                 <div class="rounded-circle border border-secondary position-relative " style="width: 308px;">
                   <div class="teacher-1 m-5"></div>
-                  <img src="../assets/images/Ellipse18.png" alt="" class="position-absolute top-0 end-0">
+                  <img src="@/assets/images/Ellipse18.png" alt="導師相片" class="position-absolute top-0 end-0">
                 </div>
               </div>
               <div class="card-body bg-primary p-0">
                 <h5 class="card-title mt-6 text-center mb-8 fz-18" >Aaliyah</h5>
-                <p class="card-text mb-6 fs-6">人的一生中，與自己的對話，多過與別人的對話 但我們對自己講的話，不一定是溫和，真實，有幫助， 有時甚至毫不尊重．</p>
+                <p class="card-text mb-6 fs-6">人的一生中，與自己的對話，多過與別人的對話 但我們對自己講的話，不一定是溫和，真實，有幫助， 有時甚至毫不尊重。</p>
                 <div class="text-center">
                   <button type="button" class="btn btn-secondary rounded-pill px-10 py-3 text-white">課程連結</button>
                 </div>
@@ -87,7 +82,7 @@
               <div class="bg-primary border-primary">
                 <div class="rounded-circle border border-secondary position-relative" style="width: 308px;">
                   <div class="teacher-2 m-5"></div>
-                  <img src="../assets/images/Ellipse18.png" alt="" class="position-absolute bottom-0 end-0">
+                  <img src="@/assets/images/Ellipse18.png" alt="導師相片" class="position-absolute bottom-0 end-0">
                 </div>
               </div>
               <div class="card-body bg-primary p-0">
@@ -110,7 +105,7 @@
       </div>
       <div class="row align-items-center px-3 py-8 bg-F7F3F0 mb-6 border-bottom border-primary border-4">
           <div class="offset-lg-2 col-xl-1 p-0 col-lg-2 col-sm-3 col-md-2 text-center mb-3">
-            <img src="../assets/images/Group.png" alt="">
+            <img src="@/assets/images/Group.png" alt="女性頭像圖示">
           </div>
           <div class=" p-0 mb-5 col-xl-6 col-lg-5 col-sm-9 col-md-10 fs-5">
             <p class="m-0">20年的婚姻，終究沒能繼續下去，而當我的人生，只為活而活時，我感覺我需要幫助而到了這裡遇見XXX心理師，他引導著我，找到屬於我的意義...</p>
@@ -121,10 +116,10 @@
       </div>
       <div class="row align-items-center px-3 py-8 bg-F7F3F0 mb-6 border-bottom border-primary border-4">
           <div class="offset-lg-2 col-xl-1 p-0 col-lg-2 col-sm-3 col-md-2 text-center mb-3">
-            <img src="../assets/images/Group2.png" alt="">
+            <img src="@/assets/images/Group2.png" alt="男性頭像圖示">
           </div>
-          <div class=" p-0 mb-5 col-lg-6 col-10 fs-5">
-            <p class="m-0">［你的眼睛正在打開，而他的卻在闔上］一句話讓我當場淚崩，我不想將來才 後悔，沒有好好的和父母擁抱．</p>
+          <div class=" p-0 mb-5 col-xl-6 col-lg-5 col-sm-9 col-md-10 fs-5">
+            <p class="m-0">［你的眼睛正在打開，而他的卻在闔上］一句話讓我當場淚崩，我不想將來才 後悔，沒有好好的和父母擁抱。</p>
           </div>
           <div class="col-lg-3 ps-19 pe-0 d-lg-block d-flex justify-content-end">
             <RouterLink :to="`/articles`" class="btn btn-secondary rounded-pill text-white fs-6">更多故事</RouterLink>
@@ -133,10 +128,10 @@
     </div>
     <div class="d-flex justify-content-center">
       <button type="btn" class="preBtn bg-white border-0 position-relative me-1">
-        <img class="position-absolute top-50 start-50 translate-middle" src="../assets/images/pre.png" alt="" style="height: 12px;">
+        <img class="position-absolute top-50 start-50 translate-middle" src="@/assets/images/pre.png" alt="上一頁箭頭圖示" style="height: 12px;">
       </button>
       <button type="btn" class="preBtn bg-white border-0 position-relative ms-1">
-        <img class="position-absolute top-50 start-50 translate-middle" src="../assets/images/next.png" alt="" style="height: 12px;">
+        <img class="position-absolute top-50 start-50 translate-middle" src="@/assets/images/next.png" alt="下一頁箭頭圖示" style="height: 12px;">
       </button>
     </div>
   </div>
@@ -170,7 +165,7 @@
       <div class="row">
         <h2 class="text-white text-center mt-md-48 mt-15 fs-1 mb-md-6 mb-8">只差最後一步，就可以開始探索自己</h2>
         <div class="d-flex justify-content-center">
-          <RouterLink to="teachers" type="button" class="btn btn-primary rounded-pill fs-6 text-white px-10 py-3">立即找到您的人生導師</RouterLink>
+          <RouterLink to="teachers" type="button" class="btn btn-secondary rounded-pill fs-6 text-white px-10 py-3">立即找到您的人生導師</RouterLink>
         </div>
       </div>
     </div>
@@ -180,7 +175,7 @@
 
 <script>
 import { RouterLink } from 'vue-router';
-import swiper from '../components/SwiperComponent.vue'
+import swiper from '@/components/SwiperComponent.vue'
 export default {
   components: {
     swiper,
