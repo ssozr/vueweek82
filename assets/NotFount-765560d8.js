@@ -1,0 +1,1 @@
+import{_ as t,r as o,o as s,c,b as a,w as n,a as r,e as _}from"./index-8201d654.js";const i={},d={class:"container"},f=r("p",{class:"fs-1"},"404:錯誤網址",-1);function l(p,u){const e=o("RouterLink");return s(),c("div",d,[f,a(e,{to:"/",class:"fs-1 text-info"},{default:n(()=>[_("點擊返回首頁")]),_:1})])}const x=t(i,[["render",l]]);export{x as default};
