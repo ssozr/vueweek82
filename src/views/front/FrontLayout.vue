@@ -18,7 +18,7 @@
           <li class="me-6"><RouterLink to="/articles">文章分享</RouterLink></li>
           <li class="me-6"><RouterLink to="/about">關於我們</RouterLink></li>
           <li class="me-6"><RouterLink to="/teachers">課程列表</RouterLink></li>
-          <li><RouterLink to="/cart"><span class="material-symbols-outlined">
+          <li><RouterLink to="/cart">{{ carts.length }}<span class="material-symbols-outlined">
 shopping_cart
 </span></RouterLink></li>
         </ul>
@@ -64,6 +64,9 @@ shopping_cart
 </template>
 
 <script>
+import cartStore from '../../stores/cart';
+import { mapState, mapActions } from 'pinia';
+
 export default{
 data () {
   return {
@@ -76,7 +79,14 @@ methods: {
   },
   changeBtn () {
     this.menuContent = false
-  }
+  },
+  ...mapActions(cartStore, ['getCartDataPinia'])
+},
+computed: {
+  ...mapState(cartStore, ['carts'])
+},
+mounted () {
+  this.getCartDataPinia()
 }
 }
 </script>

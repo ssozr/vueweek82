@@ -30,13 +30,17 @@
       </div>
     </div>
   </div>
-  <div class="mb-15 mb-md-30">
+  <div class="my-15 my-md-30 container">
+    <h2 class="border-bottom border-primary border-3 pb-3">相關課程</h2>
     <SwiperClassVue></SwiperClassVue>
   </div>
 </template>
 
 <script>
 import Swal from 'sweetalert2'
+import cartStore from '@/stores/cart';
+import classStore from '@/stores/class';
+import { mapActions } from 'pinia'
 import SwiperClassVue from '@/components/SwiperClass.vue'
 const { VITE_PATH, VITE_URL} = import.meta.env
 export default{
@@ -61,29 +65,9 @@ export default{
           console.log(err)
         })
     },
-    addCart (item) {
-      const data = {
-        product_id: item.id,
-        qty: 1
-      }
-      this.$http.post(`${VITE_URL}/v2/api/${VITE_PATH}/cart`, { data })
-        .then((res) => {
-          console.log(res)
-          if(this.goCart === false){
-            Swal.fire(`${res.data.message}`)
-          }else{
-            this.goCart = false
-            this.$router.push('/cart')
-          }
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    },
-    changeGoCart (item) {
-      this.goCart = true
-      this.addCart(item)
-    }
+    ...mapActions(cartStore, ['addCart']),
+    ...mapActions(cartStore, ['changeGoCart'])
+    
     
   },
   mounted () {

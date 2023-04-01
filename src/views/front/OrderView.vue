@@ -322,7 +322,8 @@
 </template>
 
 <script>
-
+import cartStore from '@/stores/cart'
+import { mapActions } from 'pinia'
 import { Modal } from 'bootstrap'
 import Swal from 'sweetalert2'
 import { RouterLink } from 'vue-router'
@@ -399,6 +400,7 @@ export default {
         this.delModal.hide()
         this.getCartData()
         this.dataModal.hide()
+        this.getCartDataPinia()
         Swal.fire(`${res.data.message}`)
       })
       .catch((err) => {
@@ -503,6 +505,7 @@ export default {
         return number.toLocaleString();
       }
     },
+    ...mapActions(cartStore, ['getCartDataPinia'])
   },
   mounted () {
     this.getCartData() /* 獲取購物車資料 */

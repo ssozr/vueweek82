@@ -32,7 +32,7 @@
         </div>
       </div>
       <div class="row">
-        <RouterLink :to="`/class/${product.id}`" v-for="(product, i) in classData" :key="i" class="col-lg-4 col-md-6 mb-8 border-0 card-group justify-content-center product ">
+        <RouterLink :to="`/class/${product.id}`" v-for="(product, i) in classData" :key="i" class="col-lg-4 col-md-6 mb-8 border-0 card-group justify-content-center product " @click="getClasstDataPinia(product.category, product.id)">
             <div class="card h-100 bg-primary border-0 pt-4">
               <div class="d-flex justify-content-center" >
                 <div class="d-flex justify-content-center align-items-center border rounded-circle border-secondary" style="width: 308px height: 308px;">
@@ -63,6 +63,8 @@
 const {VITE_PATH, VITE_URL} = import.meta.env
 import Pagination from '@/components/PaginationView.vue'
 import { RouterLink } from 'vue-router'
+import classStore from '@/stores/class'
+import { mapActions } from 'pinia'
 export default {
   data () {
     return {
@@ -82,6 +84,7 @@ export default {
       .then((res) => {
         this.classData = res.data.products
         this.pagination = res.data.pagination
+        console.log( this.classData[0].category)
       })
       .catch((err) => {
         alert(err.data.message).error(err)
@@ -100,7 +103,8 @@ export default {
         .catch((err) => {
           alert(err.data.message).error(err)
         })
-    }
+    },
+    ...mapActions(classStore, ['getClasstDataPinia'])
   },
   mounted () {
     this.getClassData()
