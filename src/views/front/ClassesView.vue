@@ -22,7 +22,7 @@
     <div class="container py-15 px-0">
       <div class="mb-4">
         <div class="btn btn-primary">
-          <select class="btn btn-primary px-0 py-3" @change="changeClass">
+          <select class="btn btn-primary px-0 py-3" @change="changeClass" v-model="changeData">
             <option value="" selected>全部課程</option>
             <option value="自我成長">自我成長</option>
             <option value="感情婚姻">感情婚姻</option>
@@ -32,7 +32,7 @@
         </div>
       </div>
       <div class="row">
-        <RouterLink :to="`/class/${product.id}`" v-for="(product, i) in classData" :key="i" class="col-lg-4 col-md-6 mb-8 border-0 card-group justify-content-center product " @click="getClasstDataPinia(product.category, product.id)">
+        <RouterLink :to="`/class/${product.id}`" v-for="(product, i) in classData" :key="i" class="col-lg-4 col-md-6 mb-8 border-0 card-group justify-content-center product ">
             <div class="card h-100 bg-primary border-0 pt-4">
               <div class="d-flex justify-content-center" >
                 <div class="d-flex justify-content-center align-items-center border rounded-circle border-secondary" style="width: 308px height: 308px;">
@@ -63,16 +63,20 @@
 const {VITE_PATH, VITE_URL} = import.meta.env
 import Pagination from '@/components/PaginationView.vue'
 import { RouterLink } from 'vue-router'
-import classStore from '@/stores/class'
-import { mapActions } from 'pinia'
+import searchStore from '@/stores/search'
+import { mapState } from 'pinia'
 export default {
   data () {
     return {
       filterValue: '',
       dropdownText: '課程篩選',
       classData: [],
-      pagination: {}
+      pagination: {},
+      changeData: ''
     }
+  },
+  computed: {
+    ...mapState(searchStore, ['categoryData'])
   },
   components: {
     Pagination,
@@ -84,7 +88,6 @@ export default {
       .then((res) => {
         this.classData = res.data.products
         this.pagination = res.data.pagination
-        console.log( this.classData[0].category)
       })
       .catch((err) => {
         alert(err.data.message).error(err)
@@ -104,10 +107,27 @@ export default {
           alert(err.data.message).error(err)
         })
     },
-    ...mapActions(classStore, ['getClasstDataPinia'])
+    searchClass (category) {
+      this.$http.get(`${VITE_URL}v2/api/${VITE_PATH}/products/?category=${category}`)
+        .then((res) => {
+          this.changeData = category
+          this.classData = res.data.products
+          this.pagination = res.data.pagination
+        })
+        .catch((err) => {
+          alert(err.data.message).error(err)
+        })
+    },
+    text () {
+      if (this.categoryData) {
+        this.searchClass(this.categoryData)
+      } else {
+        this.getClassData()
+      }
+    }
   },
   mounted () {
-    this.getClassData()
+    this.text()
   }
 }
 </script>

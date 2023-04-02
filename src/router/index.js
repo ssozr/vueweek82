@@ -45,7 +45,11 @@ const router = createRouter({
         {
           path: 'order',
           component: () => import('../views/front/OrderView.vue')
-        }
+        },
+        {
+          path: 'class/:category',
+          component: () => import('../views/front/ClassesView.vue')
+        },
       ]
       
     },

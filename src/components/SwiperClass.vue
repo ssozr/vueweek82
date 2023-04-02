@@ -35,13 +35,11 @@ body {
 .card-img {
   object-fit: cover;
   object-position: center;
+  height: 268px;
+  width: 268px;
 }
 .product {
   border:1px solid #F8C343;
-}
-.product:hover {
-  border:1px solid #F79E1B;
-  transform: scale(0.9);
 }
 
 </style>
@@ -67,10 +65,11 @@ body {
     :modules="modules"
     class="mySwiper"
   >
-    <swiper-slide v-for="(product, i) in classDataPinia" :key="i"  @click="getClasstDataPinia(product.category, product.id)">
+    <swiper-slide v-for="(product, i) in otherClassData" :key="i">
+      <RouterLink :to="`/class/${product.id}`">
             <div class="card h-100 bg-primary border-0 pt-4">
               <div class="d-flex justify-content-center" >
-                <div class="d-flex justify-content-center align-items-center border rounded-circle border-secondary" style="width: 308px height: 308px;">
+                <div class="d-flex justify-content-center align-items-center border rounded-circle border-secondary" >
                   <img :src="product.imageUrl" class="card-img-top rounded-circle card-img p-5" alt="導師照片">
                 </div>
               </div>
@@ -83,7 +82,9 @@ body {
               <div class="card-footer text-center bg-secondary text-white">
                 詳細介紹
               </div>
-            </div></swiper-slide>
+            </div>
+        </RouterLink>
+      </swiper-slide>
   </swiper>
 </template>
 
@@ -100,11 +101,10 @@ import "swiper/css/pagination";
 
 // import required modules
 import { EffectCoverflow, Pagination, Autoplay } from "swiper";
-import classStore from "@/stores/class";
-import { mapState, mapActions } from "pinia";
 import { RouterLink } from "vue-router";
 
 export default {
+  props: ['otherClassData'],
   components: {
     Swiper,
     SwiperSlide,
@@ -114,12 +114,6 @@ export default {
     return {
       modules: [EffectCoverflow, Pagination, Autoplay],
     };
-  },
-  computed: {
-    ...mapState(classStore, ['classDataPinia'])
-  },
-  methods: {
-    ...mapActions(classStore, ['getClasstDataPinia'])
   }
 };
 </script>

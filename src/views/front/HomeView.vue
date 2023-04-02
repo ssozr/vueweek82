@@ -7,11 +7,12 @@
           <h1 class="mb-0 fs-1">用我們的專業，幫您看見內心</h1>
           <label for="search"><h4 class="mt-md-8 pb-md-6 mt-3 pb-3 mb-0">我想看見...</h4></label>
           <div class="input-group">
-            <select class="form-select" id="search">
-              <option >人生方向、家庭關係...</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+            <select class="form-select" id="search" @change="searchCategory">
+              <option value="" selected></option>
+              <option value="自我成長">自我成長</option>
+              <option value="感情婚姻">感情婚姻</option>
+              <option value="人際關係">人際關係</option>
+              <option value="諮商談話">諮商談話</option>
             </select>
             <button type="button" class="input-group-text bg-primary btn d-flex">
               <span class="material-symbols-outlined text-white">search</span>
@@ -176,10 +177,24 @@
 <script>
 import { RouterLink } from 'vue-router';
 import swiper from '@/components/SwiperComponent.vue'
+import searchStore from '@/stores/search.js';
+import { mapActions } from 'pinia';
 export default {
+  data () {
+    return {
+      selected: ''
+    }
+  },
   components: {
     swiper,
     RouterLink
+  },
+  methods: {
+    searchCategory (category) {
+      this.selected = category.target.value
+      this.search(this.selected)
+    },
+    ...mapActions(searchStore, ['search'])
   }
 }
 </script>

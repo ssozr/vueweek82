@@ -32,14 +32,14 @@
   </div>
   <div class="my-15 my-md-30 container">
     <h2 class="border-bottom border-primary border-3 pb-3">相關課程</h2>
-    <SwiperClassVue></SwiperClassVue>
+    <SwiperClassVue
+    :other-class-data="otherClassData"></SwiperClassVue>
   </div>
 </template>
 
 <script>
 import Swal from 'sweetalert2'
 import cartStore from '@/stores/cart';
-import classStore from '@/stores/class';
 import { mapActions } from 'pinia'
 import SwiperClassVue from '@/components/SwiperClass.vue'
 const { VITE_PATH, VITE_URL} = import.meta.env
@@ -47,8 +47,10 @@ export default{
   data () {
     return {
       classData: {},
+      otherClassData: [],
       id: '',
       goCart: false,
+      category: ''
     }
   },
   components: {
@@ -60,10 +62,22 @@ export default{
         .then((res) => {
           console.log(res)
           this.classData = res.data.product
+          this.category = res.data.product.category
+          this.getOtherClassData()
         })
         .catch((err) => {
-          console.log(err)
+          alert(err.data.message).error(err)
         })
+    },
+    getOtherClassData () {
+      console.log(12132)
+      this.$http.get(`${VITE_URL}v2/api/${VITE_PATH}/products/?category=${this.category}`)
+      .then((res) => {
+        this.otherClassData = res.data.products
+      })
+      .catch((err) => {
+        alert(err.data.message).error(err)
+      })
     },
     ...mapActions(cartStore, ['addCart']),
     ...mapActions(cartStore, ['changeGoCart'])
