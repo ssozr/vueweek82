@@ -38,7 +38,6 @@
 </template>
 
 <script>
-import Swal from 'sweetalert2'
 import cartStore from '@/stores/cart';
 import { mapActions } from 'pinia'
 import SwiperClassVue from '@/components/SwiperClass.vue'
