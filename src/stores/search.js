@@ -12,6 +12,9 @@ const searchStore = defineStore('search', {
     search (category) {
         this.categoryData = category
         router.push('/teachers')
+    },
+    searchOff () {
+      this.categoryData = ''
     }
   },
 })

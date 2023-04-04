@@ -1,10 +1,10 @@
 
 
 <template>
-  <div class="container mb-15 teacher">
+  <div class="container mb-15 teacher" data-aos="fade-right">
     <div class="row">
-      <div class="text-center p-0 mb-10">
-        <img :src="classData.imagesUrl" class="imgI" alt="">
+      <div class="text-center p-0 mb-10 col-8 offset-2">
+        <img :src="classData.imagesUrl" class="imgI" alt="課程示意圖">
       </div>
       <div class="mb-10">
         <h2 class="border-bottom border-primary border-3 pb-3">{{ classData.title }} <span class="fs-6 mt-lg-0 mt-3 ps-lg-5 d-inline-block">{{ classData.description }}</span></h2>
@@ -19,7 +19,7 @@
           <div class="d-lg-flex text-lg-start text-center justify-content-between  align-items-end">
             <ul class="p-0 m-0">
               <li><p class="fs-4">課程堂數:<span class="ms-4">{{ classData.origin_price }}堂</span></p></li>
-              <li><p class="fs-4 m-0">課程總額:<span class="ms-4">NT${{ classData.price }}</span></p></li>
+              <li><p class="fs-4 m-0">課程總額:<span class="ms-4">NT${{ formatNumber(classData.price) }}</span></p></li>
             </ul>
             <div class="d-lg-flex mt-3">
               <button type="button" class="btn btn-primary" @click="addCart(classData)">加入購物車</button>
@@ -30,7 +30,7 @@
       </div>
     </div>
   </div>
-  <div class="my-15 my-md-30 container">
+  <div class="my-15 my-md-30 container" data-aos="fade-right">
     <h2 class="border-bottom border-primary border-3 pb-3">相關課程</h2>
     <SwiperClassVue
     :other-class-data="otherClassData"></SwiperClassVue>
@@ -80,9 +80,12 @@ export default{
       })
     },
     ...mapActions(cartStore, ['addCart']),
-    ...mapActions(cartStore, ['changeGoCart'])
-    
-    
+    ...mapActions(cartStore, ['changeGoCart']),
+    formatNumber(number) {
+      if(number){
+        return number.toLocaleString();
+      }
+    },
   },
   mounted () {
     const { id } = this.$route.params

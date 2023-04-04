@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid d-flex flex-column min-vh-100">
+  <div class=" d-flex flex-column min-vh-100">
     <div>
       <div class="border-bottom">
       <div class="container-xl">
@@ -17,10 +17,10 @@
           <ul class="d-flex m-0 p-0 header-list">
           <li class="me-6"><RouterLink to="/articles">文章分享</RouterLink></li>
           <li class="me-6"><RouterLink to="/about">關於我們</RouterLink></li>
-          <li class="me-6"><RouterLink to="/teachers">課程列表</RouterLink></li>
-          <li><RouterLink to="/cart">{{ carts.length }}<span class="material-symbols-outlined">
+          <li class="me-6"><RouterLink to="/teachers" @click="searchOff">課程列表</RouterLink></li>
+          <li><RouterLink to="/cart"><span class="material-symbols-outlined">
 shopping_cart
-</span></RouterLink></li>
+</span><span class="badge rounded-pill bg-danger">{{ carts.length }}</span></RouterLink></li>
         </ul>
         </div>
       </div>
@@ -33,7 +33,7 @@ shopping_cart
           <ul class="mt-15">
             <li class="fs-6 text-center mb-8" @click="changeBtn()"><RouterLink to="/articles">文章分享</RouterLink></li>
             <li class="fs-6 text-center mb-8"  @click="changeBtn()"><RouterLink to="/about">關於我們</RouterLink></li>
-            <li class="fs-6 text-center mb-8"  @click="changeBtn()"><RouterLink to="/teachers">課程列表</RouterLink></li>
+            <li class="fs-6 text-center mb-8"  @click="changeBtn()"><RouterLink to="/teachers" @click="searchOff">課程列表</RouterLink></li>
             <li class="fs-6 text-center mb-8"  @click="changeBtn()"><RouterLink to="/cart"><span class="material-symbols-outlined">
 shopping_cart
 </span></RouterLink></li>
@@ -65,6 +65,7 @@ shopping_cart
 
 <script>
 import cartStore from '../../stores/cart';
+import searchStore from '../../stores/search';
 import { mapState, mapActions } from 'pinia';
 
 export default{
@@ -80,10 +81,11 @@ methods: {
   changeBtn () {
     this.menuContent = false
   },
-  ...mapActions(cartStore, ['getCartDataPinia'])
+  ...mapActions(cartStore, ['getCartDataPinia']),
+  ...mapActions(searchStore, ['searchOff'])
 },
 computed: {
-  ...mapState(cartStore, ['carts'])
+  ...mapState(cartStore, ['carts']),
 },
 mounted () {
   this.getCartDataPinia()

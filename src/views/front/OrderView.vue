@@ -60,7 +60,7 @@
 </style>
 
 <template>
-  <div class="container-fuli">
+  <div class="container-fuli" data-aos="fade-right">
     <div class="row">
       <ul class="order-progress pt-4"> <!-- 流程 -->
         <li class="active">訂單確認</li>

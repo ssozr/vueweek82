@@ -1,5 +1,5 @@
 <template>
-  <div class="container p-0">
+  <div class="container p-0" data-aos="fade-right">
     <div class="row">
       <div v-if="cartData.total === 0" class="text-center my-30">
         <div class="d-flex justify-content-center">
