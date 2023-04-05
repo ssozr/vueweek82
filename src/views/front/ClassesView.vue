@@ -18,11 +18,11 @@
 </style>
 
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid" data-aos="fade-right">
     <div class="container py-15 px-0">
       <div class="mb-4">
         <div class="btn btn-primary">
-          <select class="btn btn-primary px-0 py-3" @change="changeClass">
+          <select class="btn btn-primary px-0 py-3" @change="changeClass" v-model="changeData">
             <option value="" selected>全部課程</option>
             <option value="自我成長">自我成長</option>
             <option value="感情婚姻">感情婚姻</option>
@@ -63,14 +63,20 @@
 const {VITE_PATH, VITE_URL} = import.meta.env
 import Pagination from '@/components/PaginationView.vue'
 import { RouterLink } from 'vue-router'
+import searchStore from '@/stores/search'
+import { mapState } from 'pinia'
 export default {
   data () {
     return {
       filterValue: '',
       dropdownText: '課程篩選',
       classData: [],
-      pagination: {}
+      pagination: {},
+      changeData: ''
     }
+  },
+  computed: {
+    ...mapState(searchStore, ['categoryData'])
   },
   components: {
     Pagination,
@@ -100,10 +106,28 @@ export default {
         .catch((err) => {
           alert(err.data.message).error(err)
         })
+    },
+    searchClass (category) {
+      this.$http.get(`${VITE_URL}v2/api/${VITE_PATH}/products/?category=${category}`)
+        .then((res) => {
+          this.changeData = category
+          this.classData = res.data.products
+          this.pagination = res.data.pagination
+        })
+        .catch((err) => {
+          alert(err.data.message).error(err)
+        })
+    },
+    text () {
+      if (this.categoryData) {
+        this.searchClass(this.categoryData)
+      } else {
+        this.getClassData()
+      }
     }
   },
   mounted () {
-    this.getClassData()
+    this.text()
   }
 }
 </script>

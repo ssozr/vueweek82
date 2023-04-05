@@ -1,5 +1,5 @@
 <template>
-  <div class="container p-0">
+  <div class="container p-0" data-aos="fade-right">
     <div class="row">
       <div v-if="cartData.total === 0" class="text-center my-30">
         <div class="d-flex justify-content-center">
@@ -131,7 +131,9 @@
 </template>
 
 <script>
+import cartStore from '@/stores/cart';
 import { Modal } from 'bootstrap'
+import { mapActions } from 'pinia';
 import Swal from 'sweetalert2'
 const { VITE_URL, VITE_PATH } = import.meta.env
 import { RouterLink } from 'vue-router'
@@ -190,6 +192,7 @@ export default {
           this.getCartData()
           this.dataModal.hide()
           Swal.fire(`${res.data.message}`)
+          this.getCartDataPinia()
         })
         .catch((err) => {
           alert(err.data.message).error(err)
@@ -201,6 +204,7 @@ export default {
           this.delId = ""
           this.delModal.hide()
           this.getCartData()
+          this.getCartDataPinia()
           Swal.fire(`${res.data.message}`)
         })
         .catch((err) => {
@@ -230,6 +234,7 @@ export default {
         return number.toLocaleString();
       }
     },
+    ...mapActions(cartStore, ['getCartDataPinia'])
   },
   mounted () {
     this.getCartData()

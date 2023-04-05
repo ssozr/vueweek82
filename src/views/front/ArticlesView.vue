@@ -1,5 +1,5 @@
 <template>
-  <div class="articles">
+  <div class="articles" data-aos="fade-right">
     <div class="container my-15">
       <div class="row">
         <RouterLink :to="`/article/${item.id}`"  v-for="(item, i) in articleData" :key="i">
@@ -15,7 +15,7 @@
                     <p class="card-text">{{ item.description }}</p>
                   </div>
                   <div class="d-flex justify-content-between">
-                    <p class="card-text"><small class="text-muted">{{ time(item.create_at) }}</small></p>
+                    <p class="card-text mb-0 d-flex align-items-end"><small class="text-muted">{{ time(item.create_at) }}</small></p>
                     <button type="button" class="btn btn-primary">閱讀全文</button>
                   </div>
               </div>

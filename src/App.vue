@@ -1,11 +1,18 @@
 <template>
-  <div class="container-fluid">
+  <div>
     <router-view />
   </div>
 </template>
 
 <script>
-export default {}
+import AOS from 'aos'
+import 'aos/dist/aos.css'
+
+export default {
+  mounted () {
+    AOS.init()
+  }
+}
 </script>
 
 <style lang="scss">

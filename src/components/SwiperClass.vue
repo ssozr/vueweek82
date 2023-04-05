@@ -25,12 +25,21 @@ body {
   background-position: center;
   background-size: cover;
   width: 300px;
-  height: 300px;
+  height: auto;
 }
 
 .swiper-slide img {
   display: block;
-  width: 100%;
+}
+
+.card-img {
+  object-fit: cover;
+  object-position: center;
+  height: 268px;
+  width: 268px;
+}
+.product {
+  border:1px solid #F8C343;
 }
 
 </style>
@@ -56,33 +65,26 @@ body {
     :modules="modules"
     class="mySwiper"
   >
-    <swiper-slide
-      ><img
-        src="https://swiperjs.com/demos/images/nature-1.jpg" /></swiper-slide
-    ><swiper-slide
-      ><img
-        src="https://swiperjs.com/demos/images/nature-2.jpg" /></swiper-slide
-    ><swiper-slide
-      ><img
-        src="https://swiperjs.com/demos/images/nature-3.jpg" /></swiper-slide
-    ><swiper-slide
-      ><img
-        src="https://swiperjs.com/demos/images/nature-4.jpg" /></swiper-slide
-    ><swiper-slide
-      ><img
-        src="https://swiperjs.com/demos/images/nature-5.jpg" /></swiper-slide
-    ><swiper-slide
-      ><img
-        src="https://swiperjs.com/demos/images/nature-6.jpg" /></swiper-slide
-    ><swiper-slide
-      ><img
-        src="https://swiperjs.com/demos/images/nature-7.jpg" /></swiper-slide
-    ><swiper-slide
-      ><img
-        src="https://swiperjs.com/demos/images/nature-8.jpg" /></swiper-slide
-    ><swiper-slide
-      ><img src="https://swiperjs.com/demos/images/nature-9.jpg"
-    /></swiper-slide>
+    <swiper-slide v-for="(product, i) in otherClassData" :key="i">
+      <RouterLink :to="`/class/${product.id}`">
+            <div class="card h-100 bg-primary border-0 pt-4">
+              <div class="d-flex justify-content-center" >
+                <div class="d-flex justify-content-center align-items-center border rounded-circle border-secondary" >
+                  <img :src="product.imageUrl" class="card-img-top rounded-circle card-img p-5" alt="導師照片">
+                </div>
+              </div>
+              <div class="card-body text-center p-0 mt-5">
+                <h2 class="card-title fs-4">{{ product.title}}</h2>
+                <div class="mt-8 mb-6">
+                  <p class="card-text fs-6">{{ product.description }}</p>
+                </div>
+              </div>
+              <div class="card-footer text-center bg-secondary text-white">
+                詳細介紹
+              </div>
+            </div>
+        </RouterLink>
+      </swiper-slide>
   </swiper>
 </template>
 
@@ -99,16 +101,19 @@ import "swiper/css/pagination";
 
 // import required modules
 import { EffectCoverflow, Pagination, Autoplay } from "swiper";
+import { RouterLink } from "vue-router";
 
 export default {
+  props: ['otherClassData'],
   components: {
     Swiper,
     SwiperSlide,
+    RouterLink
   },
   setup() {
     return {
       modules: [EffectCoverflow, Pagination, Autoplay],
     };
-  },
+  }
 };
 </script>
