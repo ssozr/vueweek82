@@ -77,14 +77,14 @@
        } 
     }
     .teacher-1 {
-        background-image: url("./images/Ellipse\ 14\ \(1\).png");
+        background-image: url("./images/teacher1.png");
         height: 268px;
         width: 268px;
         @include backgroundImage();
         border-radius:50%;
     }
     .teacher-2 {
-        background-image: url("./images/Ellipse\ 14.png");
+        background-image: url("./images/teacher2.png");
         height: 268px;
         width: 268px;
         @include backgroundImage();
