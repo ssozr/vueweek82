@@ -1,5 +1,5 @@
 <template>
-  <div class="container p-0 mt-15">
+  <div class="container p-0 mt-15"  data-aos="fade-right">
     <div class="row">
       <div class=" border-bottom border-primary border-3">
         <h2 class="d-flex">關於心理諮商這件事</h2>
