@@ -1,5 +1,3 @@
-
-
 <template>
   <div class="container mb-15 teacher" data-aos="fade-right">
     <div class="row">
@@ -35,12 +33,31 @@
     <SwiperClassVue
     :other-class-data="otherClassData"></SwiperClassVue>
   </div>
+
+  <div class="modal" tabindex="-1" ref="addModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Modal body text goes here.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 import cartStore from '@/stores/cart';
 import { mapActions } from 'pinia'
 import SwiperClassVue from '@/components/SwiperClass.vue'
+import { Modal } from 'bootstrap'
 const { VITE_PATH, VITE_URL} = import.meta.env
 export default{
   data () {
@@ -59,23 +76,20 @@ export default{
     getClassData () {
       this.$http.get(`${VITE_URL}/v2/api/${VITE_PATH}/product/${this.id}`)
         .then((res) => {
-          console.log(res)
           this.classData = res.data.product
           this.category = res.data.product.category
           this.getOtherClassData()
         })
-        .catch((err) => {
-          alert(err.data.message).error(err)
+        .catch(() => {
         })
     },
     getOtherClassData () {
-      console.log(12132)
       this.$http.get(`${VITE_URL}v2/api/${VITE_PATH}/products/?category=${this.category}`)
       .then((res) => {
         this.otherClassData = res.data.products
+        this.filteredItems()
       })
-      .catch((err) => {
-        alert(err.data.message).error(err)
+      .catch(() => {
       })
     },
     ...mapActions(cartStore, ['addCart']),
@@ -84,6 +98,16 @@ export default{
       if(number){
         return number.toLocaleString();
       }
+    },
+    filteredItems () {
+      let data = []
+      const id = this.id
+      this.otherClassData.forEach(function(item) {
+        if (item.id !== id) {
+          data.push(item)
+        }
+      });
+      this.otherClassData = data
     },
   },
   mounted () {
