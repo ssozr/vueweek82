@@ -2,9 +2,9 @@
   <div class=" d-flex flex-column min-vh-100">
     <div>
       <div class="border-bottom">
-      <div class="container-xl">
+      <div class="container">
       <div class="header row">
-      <div class="d-flex justify-content-between py-4 m-0 px-0">
+      <div class="d-flex justify-content-between py-4 m-0 ">
         <div>
           <RouterLink  to="/" @click="changeBtn()"><img h-24 src="@/assets/images/Logo.png" alt="網站logo,正視心靈四個字圖示"></RouterLink>
         </div>

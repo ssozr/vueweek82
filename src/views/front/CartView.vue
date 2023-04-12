@@ -1,6 +1,6 @@
 <template>
-  <div class="container p-0" data-aos="fade-right">
-    <div class="row">
+  <div class="container" data-aos="fade-right">
+    <div class="row justify-content-center">
       <div v-if="cartData.total === 0" class="text-center my-30">
         <div class="d-flex justify-content-center">
           <h2 class="mb-10  border-bottom border-3 border-primary">尚未收錄課程</h2>
@@ -46,7 +46,7 @@
               <td></td>
               <td></td>
               <td class="align-bottom"><h2 class="border-bottom border-primary border-3 mb-0">總金額:NT <span class="ms-1">{{ formatNumber(cartData.total) }}</span></h2></td>
-              <td> <RouterLink to="/Order"><button type="button" class="btn btn-primary fs-3 ">結帳</button></RouterLink></td>
+              <td> <RouterLink to="/Order"><button type="button" class="btn btn-primary ">結帳</button></RouterLink></td>
             </tr>
           </tbody>
         </table>
@@ -65,7 +65,7 @@
           <h2 class="border-bottom border-primary border-3 mb-0 fs-4">
           總金額:NT <span class="ms-1">{{ formatNumber(cartData.total) }}</span>
         </h2>
-        <RouterLink to="/Order"><button type="button" class="btn btn-primary fs-5 ">結帳</button></RouterLink>
+        <RouterLink to="/Order"><button type="button" class="btn btn-primary ">結帳</button></RouterLink>
         </div>
       </div>
     <div>
@@ -168,7 +168,6 @@ export default {
       this.delModal.show()
       this.delId = item.id
       this.delData = item.product
-      console.log(this.delData)
     },
     openDelAllModal () {
       this.delData = {}
@@ -205,7 +204,6 @@ export default {
           this.delModal.hide()
           this.getCartData()
           this.getCartDataPinia()
-          Swal.fire(`${res.data.message}`)
         })
         .catch((err) => {
           alert(err.data.message).error(err)

@@ -24,7 +24,7 @@ const cartStore = defineStore('cart', {
           this.final_total = res.data.data.final_total
         })
         .catch((err) => {
-          console.log(err)
+          alert(err.data.message).error(err)
         })
     },
     addCart (item) {
@@ -34,7 +34,6 @@ const cartStore = defineStore('cart', {
       }
       axios.post(`${VITE_URL}/v2/api/${VITE_PATH}/cart`, { data })
         .then((res) => {
-          console.log(res)
           if(this.goCart === false){
             Swal.fire(`${res.data.message}`)
             this.getCartDataPinia()
@@ -45,7 +44,7 @@ const cartStore = defineStore('cart', {
           }
         })
         .catch((err) => {
-          console.log(err)
+          alert(err.data.message).error(err)
         })
     },
     changeGoCart (item) {

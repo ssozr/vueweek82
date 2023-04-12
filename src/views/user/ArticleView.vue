@@ -68,7 +68,7 @@
                       <input type="text" class="form-control"
                              placeholder="請輸入圖片連結" v-model="data.image">
                     </div>
-                    <img class="img-fluid" src="" alt="">
+                    <img class="img-fluid" src="" alt="要新增的圖片">
                   </div>
                   <div>
                     <button class="btn btn-outline-primary btn-sm d-block w-100">
