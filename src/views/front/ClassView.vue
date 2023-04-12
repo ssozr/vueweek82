@@ -9,7 +9,7 @@
       </div>
       <div class="row flex-lg-row-reverse">
         <div class="col-lg-4 text-center">
-          <img :src="classData.imageUrl" alt="" class="card-img rounded-circle mb-4">
+          <img :src="classData.imageUrl" alt="老師照片" class="card-img rounded-circle mb-4">
           <h3 class="mb-6 mb-lg-0">授課老師:{{ classData.unit }}</h3>
         </div>
         <div class="col-lg-8 d-flex flex-column justify-content-between">
@@ -31,7 +31,7 @@
   <div class="my-15 my-md-30 container" data-aos="fade-right">
     <h2 class="border-bottom border-primary border-3 pb-3">相關課程</h2>
     <SwiperClassVue
-    :other-class-data="otherClassData"></SwiperClassVue>
+    :other-class-data="otherClassData" />
   </div>
 
   <div class="modal" tabindex="-1" ref="addModal">

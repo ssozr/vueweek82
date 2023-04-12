@@ -32,7 +32,7 @@ import router from './router'
 import 'bootstrap'
 
 
-import './assets/all.scss'
+import './assets/scss/all.scss'
 
 
 const app = createApp(App)

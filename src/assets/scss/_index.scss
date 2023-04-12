@@ -5,15 +5,15 @@
 }
 
 .banner {
-    background-image: url("./images/banner\ bg.png");
+    background-image: url("../images/banner\ bg.png");
     height: 832px;
     @include backgroundImage();
     @media (max-width: 1200px) {
-        background-image: url("./images/banner-phone.png");
+        background-image: url("../images/banner-phone.png");
         height: 600px;
      }
     @media (max-width: 576px) {
-        background-image: url("./images/banner-phone.png");
+        background-image: url("../images/banner-phone.png");
         height: 375px;
         .search {
             position: absolute;
@@ -37,7 +37,7 @@
 
 .second {
     .img-1 {
-        background-image: url('./images/Rectangle\ 278.png');
+        background-image: url('../images/Rectangle\ 278.png');
         height: 300px;
         @include backgroundImage(); 
         @media (max-width: 768px) {
@@ -45,7 +45,7 @@
         }
     }
     .img-2 {
-        background-image: url('./images/Rectangle\ 279.png');
+        background-image: url('../images/Rectangle\ 279.png');
         height: 300px;
         @include backgroundImage();
         @media (max-width: 768px) {
@@ -53,7 +53,7 @@
         }
     }
     .img-3 {
-        background-image: url("./images/Rectangle\ 280.png");
+        background-image: url("../images/Rectangle\ 280.png");
         height: 300px;
         @include backgroundImage();
         @media (max-width: 768px) {
@@ -61,7 +61,7 @@
         }
     }
     .img-4 {
-        background-image: url("./images/Rectangle\ 281.png");
+        background-image: url("../images/Rectangle\ 281.png");
         height: 300px;
         @include backgroundImage();
         @media (max-width: 768px) {
@@ -77,14 +77,14 @@
        } 
     }
     .teacher-1 {
-        background-image: url("./images/teacher1.png");
+        background-image: url("../images/teacher1.png");
         height: 268px;
         width: 268px;
         @include backgroundImage();
         border-radius:50%;
     }
     .teacher-2 {
-        background-image: url("./images/teacher2.png");
+        background-image: url("../images/teacher2.png");
         height: 268px;
         width: 268px;
         @include backgroundImage();
@@ -98,7 +98,7 @@
         line-height: 21.6px;
     }
     .img-1 {
-        background-image: url("./images/Group\ 402.png");
+        background-image: url("../images/Group\ 402.png");
         height: 200px;
         @include backgroundImage();
         @media (max-width: 768px) {
@@ -106,7 +106,7 @@
         }
     }
     .img-2 {
-        background-image: url("./images/Group\ 403.png");
+        background-image: url("../images/Group\ 403.png");
         height: 200px;
         @include backgroundImage();
         @media (max-width: 768px) {
@@ -114,7 +114,7 @@
         }
     }
     .img-3 {
-        background-image: url("./images/Group\ 404.png");
+        background-image: url("../images/Group\ 404.png");
         height: 200px;
         @include backgroundImage();
         @media (max-width: 768px) {
@@ -122,7 +122,7 @@
         }
     }
     .img-4 {
-        background-image: url("./images/Group\ 405.png");
+        background-image: url("../images/Group\ 405.png");
         height: 200px;
         @include backgroundImage();
         @media (max-width: 768px) {
@@ -141,7 +141,7 @@
       line-height: 19.2px;
     }
     .preBtn {
-      background-image: url("./images/2.png");
+      background-image: url("../images/2.png");
       height: 40px;
       width: 40px;
       @include backgroundImage()
@@ -150,11 +150,11 @@
 
 
 .fifth {
-    background-image: url("./images/Rectangle\ 294.png");
+    background-image: url("../images/Rectangle\ 294.png");
     height: 500px;
     @include backgroundImage();
     @media (max-width: 768px) {
-      background-image: url("./images/Rectangle\ 294-2.png");
+      background-image: url("../images/Rectangle\ 294-2.png");
       height: 292px;
     }
 }

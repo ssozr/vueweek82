@@ -76,7 +76,7 @@
                     <input type="text" class="form-control"
                            placeholder="請輸入圖片連結" v-model="modal.imageUrl">
                   </div>
-                  <img class="img-fluid" :src="modal.imageUrl" alt="">
+                  <img class="img-fluid" :src="modal.imageUrl" alt="新增的圖片">
                 </div>
                 <div>
                   <input type="text" v-model="images">
@@ -86,7 +86,7 @@
                 </div>
                 <div v-if="showImageUrl">
                   <div v-for="(url, i) in modal.imagesUrl" :key="i">
-                    <img class="img-fluid" :src="url" alt="">
+                    <img class="img-fluid" :src="url" alt="已新增的圖片">
                     <button @click="removeImageUrl(i)" class="btn btn-outline-danger btn-sm d-block w-100">
                       刪除圖片
                     </button>

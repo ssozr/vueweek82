@@ -5,7 +5,7 @@
         <div class="p-0 mb-10">
           <img :src="articleData.image" alt="文章示意圖片">
         </div>
-        <div class="d-flex align-items-center justify-content-between mb-3">
+        <div class="d-md-flex align-items-center justify-content-between mb-3">
           <h2>{{ articleData.title }}</h2>
           <p class="mb-0">{{ articleData.author }}</p>
         </div>

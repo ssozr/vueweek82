@@ -18,10 +18,10 @@
         </div>
       </div>
       <div class="d-flex justify-content-center">
-        <button type="btn" class="preBtn bg-white border-0 position-relative me-1" @click="prePage()" :disabled="startNum === 0">
+        <button type="btn" class="preBtn bg-white border-0 position-relative me-1" @click="prePage()"  :class="{ 'disabled': startNum === 0, 'not_allowed': startNum === 0 }" >
           <img class="position-absolute top-50 start-50 translate-middle" src="@/assets/images/pre.png" alt="上一頁箭頭圖示" style="height: 12px;">
         </button>
-        <button type="btn" class="preBtn bg-white border-0 position-relative ms-1" @click=" nextPage()" :disabled="startNum === articlesData.length">
+        <button type="btn" class="preBtn bg-white border-0 position-relative ms-1" @click=" nextPage()" :class="{ 'disabled': startNum === articlesData.length }">
           <img class="position-absolute top-50 start-50 translate-middle" src="@/assets/images/next.png" alt="下一頁箭頭圖示" style="height: 12px;">
         </button>
       </div>

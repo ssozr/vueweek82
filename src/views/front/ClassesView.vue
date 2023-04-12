@@ -22,7 +22,7 @@
     <div class="container py-15 px-0">
       <div class="mb-4">
         <div class="btn btn-primary">
-          <select class="btn btn-primary px-0 py-3" @change="changeClass" v-model="changeData">
+          <select class="btn btn-primary px-0 py-3 border-0" @change="changeClass" v-model="changeData">
             <option value="" selected>全部課程</option>
             <option value="自我成長">自我成長</option>
             <option value="感情婚姻">感情婚姻</option>
@@ -54,7 +54,7 @@
         <Pagination :class="{ 'd-none': pagination.total_pages === 1 }"
         :pages="pagination" 
         @change-page="changePage"
-        ></Pagination>
+         />
     </div>
   </div>
 </template>

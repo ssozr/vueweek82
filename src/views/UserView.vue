@@ -6,7 +6,7 @@
   <RouterLink to="/voucher">優惠券管理</RouterLink> |
   <RouterLink to="/article">文章列表</RouterLink> |
   <hr>
-  <RouterView v-if="show"></RouterView>
+  <RouterView v-if="show" />
 </template>
 
 <script>
