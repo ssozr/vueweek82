@@ -99,7 +99,8 @@
       </div>
     </div>
   </div>
-  <articleHome data-aos="fade-right" />
+  <!-- <articleHome data-aos="fade-right" /> -->
+  <articleHome></articleHome>
   <div data-aos="fade-right" class="container-fluid bg-F7F3F0 pt-md-30 pt-15 pb-15 pb-md-30 fourth">
     <div class="container">
       <div class="d-flex justify-content-center">

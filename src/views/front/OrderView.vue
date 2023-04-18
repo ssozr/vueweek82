@@ -111,76 +111,37 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td class="align-bottom"><h2 class="border-bottom border-primary border-3 mb-0">總金額:NT <span class="ms-1">{{ formatNumber(cartData.total) }}</span></h2></td>
+                    <td class="align-bottom"><h2 class="border-bottom border-primary border-3 mb-0 fs-6">總金額:NT <span class="ms-1">{{ formatNumber(cartData.total) }}</span></h2></td>
                   </tr>
                 </tbody>
               </table>
-              <div class="row d-lg-none my-15">
-                <ul  v-for="(item, i) in cartData.carts" :key="i"  class="border-bottom pb-3 border-primary">
-                  <li class="">
-                    <RouterLink  :to="`/class/${item.product.id}`"><h2 class="fs-5">{{ item.product.title }}</h2></RouterLink>
-                    <div class="d-flex align-items-center justify-content-between">
-                      <div>課程總價格:{{ formatNumber(item.total) }}</div>
-                      <button type="button" class="btn btn-primary" @click="openDataModal(item)">詳細資料</button>
-                    </div>
-                  </li>
-                </ul>
-                <div class="text-end">
-                  <h2 class="mb-0 fs-4">
-                  總金額:NT <span class="ms-1">{{ cartData.total }}</span>
-                </h2>
-                </div>
-              </div>
-              <div class="modal" tabindex="-1" ref="delModal">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 v-if="delData.title" class="modal-title">{{ delData.title }}</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      <p>確定移出購物車?</p>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                      <button type="button" class="btn btn-primary" @click="delCart(delData.id)">確認移出</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="modal" tabindex="-1" ref="dataModal">
-                <div class="modal-dialog">
-                  <div class="modal-content" v-if="dataModalJudge">
-                    <div class="modal-header">
-                      <h5 class="modal-title">課程名稱: <span class="border-bottom border-3 border-primary">{{ productData.product.title }}</span></h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      <ul class="p-0">
-                        <li class=" mb-3">
-                          <div class="d-flex align-items-center justify-content-between">
-                            <div>總堂數:{{ productData.product.origin_price * productData.qty}}堂</div>
-                            <div>授課老師: {{ productData.product.unit }}</div>
-                          </div>
-                        </li>
-                        <li class="d-flex align-items-center justify-content-between">
-                          <div>課程總價格:{{ formatNumber(productData.total) }}</div>
-                          <div class="dropdown" >
-                            購買次數:
-                            <button  class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                              {{ productData.qty }} 
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" >
-                              <li v-for="(num, i) in 20" :key="i"><a  @click="changeQty(num,productData.id)" class="dropdown-item">{{ num }}</a></li>
-                            </ul>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                      <button type="button" class="btn btn-primary" @click="delCart(productData)">確認移出</button>
-                    </div>
+              <div class="row d-lg-none my-15 justify-content-center">
+                <div class="col-md-8">
+                  <ul  v-for="(item, i) in cartData.carts" :key="i"  class="border-bottom pb-3 border-primary">
+                    <li>
+                      <div class="d-flex justify-content-between align-items-center mb-3">
+                        <RouterLink  :to="`/class/${item.product.id}`"><h2 class="fs-5">{{ item.product.title }}</h2></RouterLink>
+                        <button type="button" class="btn btn-primary rounded-pill" @click=" openDelModal(item)">刪除</button>
+                      </div>
+                      <div class="d-flex align-items-center justify-content-between">
+                        <div class="dropdown" >
+                          購買次數:
+                          <button  class="btn btn-secondary dropdown-toggle py-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ item.qty }} 
+                          </button>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" >
+                            <li v-for="(num, i) in 20" :key="i"><a  @click="changeQty(num,item.id)" class="dropdown-item">{{ num }}</a></li>
+                          </ul>
+                        </div>
+                        <div>堂數:{{ item.product.origin_price * item.qty}}</div>
+                        <div>課程總價格:{{ formatNumber(item.total) }}</div>
+                      </div>
+                    </li>
+                  </ul>
+                  <div class="text-end">
+                    <h2 class="mb-0 fs-6">
+                    總金額:NT <span class="ms-1">{{ formatNumber(cartData.total) }}</span>
+                  </h2>
                   </div>
                 </div>
               </div>
@@ -275,7 +236,7 @@
               <button class="btn btn-outline-secondary" type="button" @click="couponBtnDel()" v-if="coupon.couponJudge">重設優惠券</button>
             </div>
           </div>
-          <div class="text-end d-flex justify-content-center col-md-4">
+          <div class="text-end d-flex justify-content-center col-md-4 mt-3">
             <div class="d-flex align-items-end">
               <h2 v-if="!coupon.couponJudge" class="border-bottom border-primary border-3 mb-0 fs-5">總金額:NT <span class="ms-1">{{ formatNumber(cartData.total) }}</span></h2>
               <h2 v-else class="border-bottom border-primary border-3 mb-0 fs-5">總金額:NT <span class="ms-1">{{ formatNumber(cartData.final_total) }}</span></h2>
@@ -296,11 +257,15 @@
               <li>若有任何問題，皆可連絡客服</li>
             </ul>
           </div>
-          <RouterLink to="/">回到首頁</RouterLink>
+          <div class="text-center">
+            <RouterLink to="/" class="btn btn-secondary">回到首頁</RouterLink>
+          </div>
         </div>
       </div>
-      <!-- 付款 Modal -->
-      <div class="modal" tabindex="-1" id="payModal" ref="payModal">
+    </div>
+  </div>
+  <!-- 付款 Modal -->
+  <div class="modal" tabindex="-1" id="payModal" ref="payModal">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -317,8 +282,59 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
+      <div class="modal" tabindex="-1" ref="delModal">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 v-if="delData.title" class="modal-title">{{ delData.title }}</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <p>確定移出購物車?</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                      <button type="button" class="btn btn-primary" @click="delCart(delData.id)">確認移出</button>
+                    </div>
+                  </div>
+                </div>
+          </div>
+          <div class="modal" tabindex="-1" ref="dataModal">
+            <div class="modal-dialog">
+              <div class="modal-content" v-if="dataModalJudge">
+                <div class="modal-header">
+                  <h5 class="modal-title">課程名稱: <span class="border-bottom border-3 border-primary">{{ productData.product.title }}</span></h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <ul class="p-0">
+                    <li class=" mb-3">
+                      <div class="d-flex align-items-center justify-content-between">
+                        <div>總堂數:{{ productData.product.origin_price * productData.qty}}堂</div>
+                        <div>授課老師: {{ productData.product.unit }}</div>
+                      </div>
+                    </li>
+                    <li class="d-flex align-items-center justify-content-between">
+                      <div>課程總價格:{{ formatNumber(productData.total) }}</div>
+                      <div class="dropdown" >
+                        購買次數:
+                        <button  class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                          {{ productData.qty }} 
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" >
+                          <li v-for="(num, i) in 20" :key="i"><a  @click="changeQty(num,productData.id)" class="dropdown-item">{{ num }}</a></li>
+                        </ul>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                  <button type="button" class="btn btn-primary" @click="delCart(productData)">確認移出</button>
+                </div>
+              </div>
+            </div>
+          </div>
 </template>
 
 <script>
@@ -399,7 +415,6 @@ export default {
         this.delId = ""
         this.delModal.hide()
         this.getCartData()
-        this.dataModal.hide()
         this.getCartDataPinia()
         Swal.fire(`${res.data.message}`)
       })
@@ -417,7 +432,6 @@ export default {
         .then((res) => {
           Swal.fire(`${res.data.message}`)
           this.disabled = false
-          this.dataModal.hide()
           this.getCartData()
         })
         .catch((err) => {
@@ -494,12 +508,6 @@ export default {
           alert(err.data.message).error(err)
         })
     },
-    openDataModal (item) {
-      this.dataModalJudge = true
-      this.productData = { ...item}
-      this.delId = item.id
-      this.dataModal.show()
-    },
     formatNumber(number) {
       if(number){
         return number.toLocaleString();
@@ -512,7 +520,6 @@ export default {
     this.delModal = new Modal(this.$refs.delModal) /* Modal */
     this.getAddressData() /* 獲取縣市區域資料 */
     this.payModal = new Modal(this.$refs.payModal)
-    this.dataModal = new Modal(this.$refs.dataModal)
   }
 }
 </script>

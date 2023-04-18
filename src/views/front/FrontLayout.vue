@@ -18,9 +18,9 @@
           <li class="me-6"><RouterLink to="/articles">文章分享</RouterLink></li>
           <li class="me-6"><RouterLink to="/about">關於我們</RouterLink></li>
           <li class="me-6"><RouterLink to="/teachers" @click="searchOff">課程列表</RouterLink></li>
-          <li><RouterLink to="/cart"><span class="material-symbols-outlined">
+          <li class="position-relative"><RouterLink to="/cart"><span class="material-symbols-outlined">
 shopping_cart
-</span><span class="badge rounded-pill bg-danger">{{ carts.length }}</span></RouterLink></li>
+</span><span class="badge rounded-pill bg-danger position-absolute bottom-50">{{ carts.length }}</span></RouterLink></li>
         </ul>
         </div>
       </div>
@@ -30,13 +30,13 @@ shopping_cart
     <div class="menu" :class="{ 'd-none': !menuContent }">
       <div class="container-fluid">
         <div class="row justify-content-center">
-          <ul class="mt-15">
+          <ul class="mt-15 ">
             <li class="fs-6 text-center mb-8" @click="changeBtn()"><RouterLink to="/articles">文章分享</RouterLink></li>
             <li class="fs-6 text-center mb-8"  @click="changeBtn()"><RouterLink to="/about">關於我們</RouterLink></li>
             <li class="fs-6 text-center mb-8"  @click="changeBtn()"><RouterLink to="/teachers" @click="searchOff">課程列表</RouterLink></li>
-            <li class="fs-6 text-center mb-8"  @click="changeBtn()"><RouterLink to="/cart"><span class="material-symbols-outlined">
+            <li class="fs-6 text-center mb-8 position-relative"  @click="changeBtn()"><RouterLink to="/cart"><span class="material-symbols-outlined">
 shopping_cart
-</span></RouterLink></li>
+</span><span class="badge rounded-pill bg-danger position-absolute bottom-50">{{ carts.length }}</span></RouterLink></li>
           </ul>
         </div>
       </div>
@@ -48,7 +48,9 @@ shopping_cart
     <div class="container footer" v-if="!menuContent">
       <div class="row">
         <div class="text-center">
-          <div class="mb-17"><img src="@/assets/images/Logo.png" alt="網站logo,正視心靈四個字圖示"></div>
+          <div class="mb-17">
+            <RouterLink @click="WindowTop()" to="/"> <img src="@/assets/images/Logo.png" alt="網站logo,正視心靈四個字圖示"></RouterLink>
+            </div>
           <div class="d-flex justify-content-center mb-2">
             <div class="img-line"></div>
           </div>
@@ -77,6 +79,9 @@ data () {
 methods: {
   menuByn () {
     this.menuContent = !this.menuContent
+  },
+  WindowTop () {
+    window.scrollTo(0, 0)
   },
   changeBtn () {
     this.menuContent = false
