@@ -119,7 +119,6 @@ export default {
     return {
       cartData: [],
       dalModal: '',
-      dataModal: '',
       delData: {},
       delId: '',
       disabled: false,
@@ -159,7 +158,6 @@ export default {
           this.delId = ""
           this.delModal.hide()
           this.getCartData()
-          this.dataModal.hide()
           Swal.fire(`${res.data.message}`)
           this.getCartDataPinia()
         })
@@ -168,7 +166,7 @@ export default {
         })
       }else{
         this.$http.delete(`${VITE_URL}/v2/api/${VITE_PATH}/carts`)
-        .then((res) => {
+        .then(() => {
           this.delData = {}
           this.delId = ""
           this.delModal.hide()
@@ -191,7 +189,6 @@ export default {
           Swal.fire(`${res.data.message}`)
           this.disabled = false
           this.getCartData()
-          this.dataModal.hide()
         })
         .catch((err) => {
           alert(err.data.message).error(err)

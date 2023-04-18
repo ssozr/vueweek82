@@ -299,42 +299,6 @@
                   </div>
                 </div>
           </div>
-          <div class="modal" tabindex="-1" ref="dataModal">
-            <div class="modal-dialog">
-              <div class="modal-content" v-if="dataModalJudge">
-                <div class="modal-header">
-                  <h5 class="modal-title">課程名稱: <span class="border-bottom border-3 border-primary">{{ productData.product.title }}</span></h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <ul class="p-0">
-                    <li class=" mb-3">
-                      <div class="d-flex align-items-center justify-content-between">
-                        <div>總堂數:{{ productData.product.origin_price * productData.qty}}堂</div>
-                        <div>授課老師: {{ productData.product.unit }}</div>
-                      </div>
-                    </li>
-                    <li class="d-flex align-items-center justify-content-between">
-                      <div>課程總價格:{{ formatNumber(productData.total) }}</div>
-                      <div class="dropdown" >
-                        購買次數:
-                        <button  class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                          {{ productData.qty }} 
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" >
-                          <li v-for="(num, i) in 20" :key="i"><a  @click="changeQty(num,productData.id)" class="dropdown-item">{{ num }}</a></li>
-                        </ul>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                  <button type="button" class="btn btn-primary" @click="delCart(productData)">確認移出</button>
-                </div>
-              </div>
-            </div>
-          </div>
 </template>
 
 <script>
@@ -354,8 +318,6 @@ export default {
       dalModal: '', /* 刪除訂單Modal */
       delData: {}, /* 刪除訂單資烙 */
       delId: '', /* 刪除訂單ID */
-      dataModal: '',
-      dataModalJudge: false,
       disabled: true,
       addressData: '', /* 縣市區域資料 */
       address: { /* 地址填寫 */
