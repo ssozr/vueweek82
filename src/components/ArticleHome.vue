@@ -39,10 +39,10 @@ body {
     color:#F79E1B;
 }
 
-.swiper-button-next, .swiper-button-prev {
-    position: static;
-    width: auto;
+.swiper-button-prev::after {
+    color:#F79E1B;
 }
+
 
 </style>
 <template>
@@ -54,7 +54,7 @@ body {
         <swiper :modules="modules" :space-between="30" :autoplay="{
       delay: 2500,
       disableOnInteraction: false,
-    }" class="mySwiper pb-0">
+    }" :navigation="true" class="mySwiper pb-0">
             <swiper-slide v-for="(article, i) in articlesData" :key="article.id">
                 <div class="row align-items-center px-3 py-8 bg-F7F3F0 mb-6 border-bottom border-primary border-4" style="width:100%">
                     <div class="offset-lg-2 col-xl-1 p-0 col-lg-2 col-sm-3 col-md-2 text-center mb-3">
@@ -86,7 +86,8 @@ body {
   
     import 'swiper/css/navigation';
 
-  
+    import { Navigation } from 'swiper';
+
     export default {
       components: {
         Swiper,
@@ -94,7 +95,7 @@ body {
       },
       setup() {
         return {
-            modules: [Grid, Pagination,Autoplay],
+            modules: [Grid, Pagination, Autoplay, Navigation],
         };
       },
       data () {
