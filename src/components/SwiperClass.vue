@@ -65,9 +65,9 @@ body {
     :modules="modules"
     class="mySwiper"
   >
-    <swiper-slide v-for="(product, i) in otherClassData" :key="i">
+    <swiper-slide v-for="(product, i) in otherClassData" :key="i" @click="changPage(product.id)">
       <RouterLink :to="`/class/${product.id}`">
-            <div class="card h-100 bg-primary border-0 pt-4">
+            <div class="card  bg-primary border-0 pt-4" style="height: 481px; width: 300px;">
               <div class="d-flex justify-content-center" >
                 <div class="d-flex justify-content-center align-items-center border rounded-circle border-secondary" >
                   <img :src="product.imageUrl" class="card-img-top rounded-circle card-img p-5" alt="導師照片">
@@ -114,6 +114,11 @@ export default {
     return {
       modules: [EffectCoverflow, Pagination, Autoplay],
     };
+  },
+  methods: {
+    changPage (id) {
+      this.$emit('chang-page', id);
+    }
   }
 };
 </script>
