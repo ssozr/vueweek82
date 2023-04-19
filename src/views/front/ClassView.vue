@@ -126,11 +126,10 @@ export default{
       this.otherClassData = data
     },
     changPage (id) {
-      console.log(id)
       this.id = id
       this.$router.push(`/class/${id}`)
-      window.scrollTo(0, 0)
       this.getClassData()
+      window.scrollTo(0, 0)
       
     },
     qty (num) {
